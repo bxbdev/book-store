@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Raleway:wght@400;500;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --title-font: "Anton", sans-serif;
+  --body-font: "Raleway", sans-serif;
+}
+
+html,
+body {
+  @apply h-full;
+}
+
+body {
+  @apply bg-red-200 bg-no-repeat bg-cover font-medium font-[var(--body-font)] m-0 bg-[url("https://images.unsplash.com/photo-1569878766010-17bff0a1987d?q=80&w=1365&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")];
+}
+
+.btn-primary {
+  @apply bg-white rounded-lg py-2 px-2 text-gray-800;
+}
+
+.error {
+  @apply text-white text-xs pt-0.5;
+}
+
+h1 {
+  @apply text-3xl font-bold;
+}
+
+.wrap {
+  @apply grid place-items-center w-screen h-screen;
+}
+
+.form {
+  @apply flex flex-col max-w-full w-80  bg-[#fb6f92] rounded-[24px] p-10 items-center;
+}
+
+.form-group {
+  @apply flex flex-col w-full gap-5;
+}
+
+.form-control {
+  @apply flex flex-col gap-2.5;
+
+  label {
+    @apply text-sm text-white;
+  }
+  input {
+    @apply w-full border-0 rounded-[8px] py-2 px-3 bg-pink-200;
+  }
+}
+
+.form-input {
+  @apply relative;
+  &.password-verify {
+    input {
+      @apply pr-10;
+    }
+  }
+  .password {
+    @apply absolute right-2 top-1/2 -translate-y-1/2;
+  }
+}
