@@ -88,7 +88,7 @@ const Signup = () => {
   return (
     <form className="form sign-up" onSubmit={handleSubmit(onSubmit)}>
       <p className="subtitle">Welcome to</p>
-      <h1 className="title">Hippo</h1>
+      <h1 className="title">Inoveltown</h1>
       <div className="form-group">
         <div className="form-control">
           <label>Username</label>
