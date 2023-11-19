@@ -80,6 +80,10 @@ const Signup = () => {
         toast.error(result);
       }
 
+      if (response.status === 500) {
+        toast.error(result);
+      }
+
       // clear inputs
       reset();
       setShowPassowrd(false);
