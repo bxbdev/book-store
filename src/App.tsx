@@ -1,5 +1,5 @@
 import "./App.scss";
-import Signup from "./Signup";
+import Signup from "./components/Signup";
 
 const App = () => {
   if (import.meta.env.VITE_APP_ENV === "local") {

@@ -19,11 +19,15 @@ body {
 }
 
 .btn-primary {
-  @apply bg-white rounded-lg py-2 px-2 text-gray-800;
+  @apply bg-white rounded-lg py-2 px-2 text-gray-500;
 }
 
 .error {
   @apply text-white text-xs pt-0.5;
+}
+
+.spinner {
+  @apply flex justify-center gap-2.5  text-gray-500;
 }
 
 h1 {
