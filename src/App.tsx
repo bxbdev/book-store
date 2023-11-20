@@ -1,19 +1,40 @@
 import "./App.scss";
-import Signup from "./components/Signup";
+import Spinner from "./assets/infinite-spinner.svg";
+import Login from "./pages/Login";
+import Layout from "./pages/Layout";
+import { useAuth } from "./contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+const env = import.meta.env.VITE_APP_ENV;
 
 const App = () => {
-  if (import.meta.env.VITE_APP_ENV === "local") {
+  const { isAuth, isLoading } = useAuth();
+  const navigate = useNavigate();
+
+  if (env === "local") {
     console.log("current environment is local");
   }
 
-  if (import.meta.env.VITE_APP_ENV === "production") {
+  if (env === "production") {
     console.log("current environment is production");
   }
-  return (
-    <div className="wrap">
-      <Signup />
-    </div>
-  );
+
+  useEffect(() => {
+    if (isAuth) navigate("/Home");
+  }, [isAuth, navigate]);
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <img style={{ width: "50vw" }} src={Spinner} alt="Loading" />
+      </Layout>
+    );
+  }
+
+  if (!isAuth) {
+    return <Login />;
+  }
 };
 
 export default App;

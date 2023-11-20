@@ -15,7 +15,7 @@ body {
 }
 
 body {
-  @apply bg-red-200 bg-no-repeat bg-cover font-medium font-[var(--body-font)] m-0 bg-[url("https://images.unsplash.com/photo-1569878766010-17bff0a1987d?q=80&w=1365&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")];
+  @apply bg-red-200 bg-no-repeat bg-cover font-medium font-[var(--body-font)] m-0;
 }
 
 .btn-primary {
@@ -36,6 +36,17 @@ h1 {
 
 .wrap {
   @apply grid place-items-center w-screen h-screen;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  &.signup {
+    @apply bg-[url("https://images.unsplash.com/photo-1569878766010-17bff0a1987d?q=80&w=1365&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")];
+  }
+
+  &.login {
+    @apply bg-[url("https://images.unsplash.com/photo-1526395050546-dc5b0fe8df5f?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")];
+  }
 }
 
 .form {
@@ -67,4 +78,8 @@ h1 {
   .password {
     @apply absolute right-2 top-1/2 -translate-y-1/2;
   }
+}
+
+.notice {
+  @apply text-xs text-white;
 }

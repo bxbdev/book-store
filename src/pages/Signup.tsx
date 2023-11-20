@@ -3,6 +3,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import Layout from "./Layout";
 
 // icons
 import HidePassword from "../assets/hide.svg";
@@ -86,6 +87,7 @@ const Signup = () => {
 
       // clear inputs
       reset();
+      // hide password
       setShowPassowrd(false);
       setShowRepeatPassowrd(false);
     } catch (error) {
@@ -103,7 +105,7 @@ const Signup = () => {
     setShowRepeatPassowrd((prev) => !prev);
   };
   return (
-    <>
+    <Layout className="signup">
       <form className="form sign-up" onSubmit={handleSubmit(onSubmit)}>
         <p className="subtitle">Welcome to</p>
         <h1 className="title">Inoveltown</h1>
@@ -198,6 +200,11 @@ const Signup = () => {
             )}
           </button>
         </div>
+        <div>
+          <a href="/" className="notice">
+            Already have an account?
+          </a>
+        </div>
       </form>
 
       <Toaster
@@ -212,7 +219,7 @@ const Signup = () => {
           },
         }}
       />
-    </>
+    </Layout>
   );
 };
 
