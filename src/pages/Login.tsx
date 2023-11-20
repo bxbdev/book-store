@@ -42,6 +42,7 @@ const Login = () => {
 
   const onLogin: SubmitHandler<UserLogin> = async ({ username, password }) => {
     try {
+      setIsLoading(true);
       const response = await fetch(`${apiBaseUrl}/login`, {
         method: "POST",
         headers: {
