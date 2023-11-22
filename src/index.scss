@@ -1,12 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Anton&family=Raleway:wght@400;500;900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --title-font: "Anton", sans-serif;
-  --body-font: "Raleway", sans-serif;
+  --source: "Source Serif 4", serif;
 }
 
 html,
@@ -15,11 +13,11 @@ body {
 }
 
 body {
-  @apply bg-red-200 bg-no-repeat bg-cover font-medium font-[var(--body-font)] m-0;
+  @apply bg-red-200 bg-no-repeat bg-cover font-source  m-0;
 }
 
 .btn-primary {
-  @apply bg-white rounded-lg py-2 px-2 text-gray-500;
+  @apply bg-white rounded-lg py-2 px-2  text-primary font-medium italic;
 }
 
 .error {
@@ -31,7 +29,7 @@ body {
 }
 
 h1 {
-  @apply text-3xl font-bold;
+  @apply text-3xl font-bold italic;
 }
 
 .wrap {
