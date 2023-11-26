@@ -6,9 +6,9 @@ import toast, { Toaster } from "react-hot-toast";
 import Layout from "./Layout";
 
 // icons
-import HidePassword from "../assets/hide.svg";
-import ShowPassowrd from "../assets/show.svg";
-import Spinner from "../assets/infinite-spinner.svg";
+import HidePassword from "../assets/icon/hide.svg?react";
+import ShowPassowrd from "../assets/icon/show.svg?react";
+import Spinner from "../assets/icon/infinite-spinner.svg";
 
 const UserSchema = z
   .object({
@@ -134,21 +134,7 @@ const Signup = () => {
                 onClick={handleShowPassword}
                 className={`password ${showPassword ? "show" : "hide"}`}
               >
-                {showPassword ? (
-                  <img
-                    width={20}
-                    height={20}
-                    src={ShowPassowrd}
-                    alt="Show password"
-                  />
-                ) : (
-                  <img
-                    width={20}
-                    height={20}
-                    src={HidePassword}
-                    alt="hide password"
-                  />
-                )}
+                {showPassword ? <ShowPassowrd /> : <HidePassword />}
               </div>
             </div>
             {errors.password && (
@@ -168,21 +154,7 @@ const Signup = () => {
                 onClick={handleShowRepeatPassword}
                 className={`password ${showRepeatPassword ? "show" : "hide"}`}
               >
-                {showRepeatPassword ? (
-                  <img
-                    src={ShowPassowrd}
-                    width={20}
-                    height={20}
-                    alt="Show password"
-                  />
-                ) : (
-                  <img
-                    src={HidePassword}
-                    width={20}
-                    height={20}
-                    alt="hide password"
-                  />
-                )}
+                {showRepeatPassword ? <ShowPassowrd /> : <HidePassword />}
               </div>
             </div>
             {errors.repeatPassword && (

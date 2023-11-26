@@ -1,5 +1,5 @@
 import "./App.scss";
-import Spinner from "./assets/infinite-spinner.svg";
+import Spinner from "./assets/icon/infinite-spinner.svg";
 import Login from "./pages/Login";
 import Layout from "./pages/Layout";
 import { useAuth } from "./contexts/AuthContext";
@@ -21,7 +21,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    if (isAuth) navigate("/Home");
+    if (isAuth) navigate("/home");
   }, [isAuth, navigate]);
 
   if (isLoading) {

@@ -7,9 +7,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import localForage from "localforage";
 
 // icons
-import HidePassword from "../assets/hide.svg";
-import ShowPassowrd from "../assets/show.svg";
-import Spinner from "../assets/infinite-spinner.svg";
+import HidePassword from "../assets/icon/hide.svg";
+import ShowPassowrd from "../assets/icon/show.svg";
+import Spinner from "../assets/icon/infinite-spinner.svg";
 import Layout from "./Layout";
 import { useAuth } from "../contexts/AuthContext";
 

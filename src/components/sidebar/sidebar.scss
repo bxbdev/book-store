@@ -1,0 +1,10 @@
+.sidebar {
+  @apply basis-[83px] bg-dark;
+}
+
+.menu {
+  @apply flex flex-col items-center;
+}
+.link {
+  @apply grid place-items-center w-[46px] p-3;
+}

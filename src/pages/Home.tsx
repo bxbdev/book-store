@@ -3,7 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useEffect } from "react";
 
 const Home = () => {
-  const { isAuth, isLoading, logout } = useAuth();
+  const { isAuth, isLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,11 +20,8 @@ const Home = () => {
 
   if (isAuth) {
     return (
-      <div>
+      <div className="content">
         <h1>Home</h1>
-        <button onClick={logout} className="btn-primary">
-          Logout
-        </button>
       </div>
     );
   }

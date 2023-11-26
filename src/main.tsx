@@ -8,6 +8,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import { AuthProvider } from "./providers/AuthContextProvider";
+import MainLayout from "./pages/MainLayout";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -16,7 +17,14 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route path="/" element={<App />}></Route>
           <Route path="/register" element={<Signup />}></Route>
-          <Route path="/Home" element={<Home />}></Route>
+          <Route
+            path="/home"
+            element={
+              <MainLayout>
+                <Home />
+              </MainLayout>
+            }
+          ></Route>
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>
       </AuthProvider>
