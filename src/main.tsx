@@ -9,6 +9,11 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import { AuthProvider } from "./providers/AuthContextProvider";
 import MainLayout from "./pages/MainLayout";
+import CreateBook from "./pages/CreateBook";
+import Categories from "./pages/Categories";
+import Collections from "./pages/Collections";
+import Notifications from "./pages/Notifications";
+import Settings from "./pages/Settings";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -22,6 +27,46 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             element={
               <MainLayout>
                 <Home />
+              </MainLayout>
+            }
+          ></Route>
+          <Route
+            path="/create-book"
+            element={
+              <MainLayout>
+                <CreateBook />
+              </MainLayout>
+            }
+          ></Route>
+          <Route
+            path="/categories"
+            element={
+              <MainLayout>
+                <Categories />
+              </MainLayout>
+            }
+          ></Route>
+          <Route
+            path="/collections"
+            element={
+              <MainLayout>
+                <Collections />
+              </MainLayout>
+            }
+          ></Route>
+          <Route
+            path="/notifications"
+            element={
+              <MainLayout>
+                <Notifications />
+              </MainLayout>
+            }
+          ></Route>
+          <Route
+            path="/settings"
+            element={
+              <MainLayout>
+                <Settings />
               </MainLayout>
             }
           ></Route>

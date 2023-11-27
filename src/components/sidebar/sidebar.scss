@@ -1,5 +1,9 @@
 .sidebar {
-  @apply basis-[83px] bg-dark;
+  @apply basis-[83px] bg-dark pt-30 pb-5 flex flex-col justify-between;
+}
+
+.logo {
+  @apply flex justify-center;
 }
 
 .menu {
@@ -7,4 +11,18 @@
 }
 .link {
   @apply grid place-items-center w-[46px] p-3;
+  svg path {
+    @apply fill-gray-A5;
+  }
+  &.active {
+    svg path {
+      @apply fill-white;
+    }
+  }
+}
+.avatar {
+  @apply w-30 h-30 overflow-hidden rounded-full mt-3;
+  img {
+    @apply w-full h-full object-cover;
+  }
 }

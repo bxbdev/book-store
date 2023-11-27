@@ -8,33 +8,61 @@ import Bell from "../../assets/icon/bell.svg?react";
 import Settings from "../../assets/icon/settings.svg?react";
 import Signout from "../../assets/icon/signout.svg?react";
 import { useAuth } from "../../contexts/AuthContext";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const { logout } = useAuth();
   return (
     <aside className="sidebar">
+      <div className="logo">
+        <img src="logo.svg" alt="logo" />
+      </div>
       <nav className="menu">
-        <a href="/home" className="link">
+        <NavLink
+          to="/home"
+          className={({ isActive }) => (isActive ? "link active" : "link")}
+        >
           <Home />
-        </a>
-        <a href="/create-new-book" className="link">
+        </NavLink>
+        <NavLink
+          to="/create-book"
+          className={({ isActive }) => (isActive ? "link active" : "link")}
+        >
           <Post />
-        </a>
-        <a href="/search" className="link">
+        </NavLink>
+        <NavLink
+          to="/categories"
+          className={({ isActive }) => (isActive ? "link active" : "link")}
+        >
           <Search />
-        </a>
-        <a href="/collections" className="link">
+        </NavLink>
+        <NavLink
+          to="/collections"
+          className={({ isActive }) => (isActive ? "link active" : "link")}
+        >
           <Collection />
-        </a>
-        <a href="/notifications" className="link">
+        </NavLink>
+        <NavLink
+          to="/notifications"
+          className={({ isActive }) => (isActive ? "link active" : "link")}
+        >
           <Bell />
-        </a>
-        <a href="/settings" className="link">
+        </NavLink>
+        <NavLink
+          to="/settings"
+          className={({ isActive }) => (isActive ? "link active" : "link")}
+        >
           <Settings />
-        </a>
+        </NavLink>
         <button className="link" onClick={logout}>
           <Signout />
         </button>
+        <NavLink to="/profile" className="avatar">
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+            alt="profile"
+          />
+        </NavLink>
       </nav>
     </aside>
   );

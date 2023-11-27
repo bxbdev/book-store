@@ -6,6 +6,15 @@ export default {
       fontFamily: {
         source: "var(--source)",
       },
+      padding: {
+        30: "30px",
+      },
+      width: {
+        30: "30px",
+      },
+      height: {
+        30: "30px",
+      },
       fontWeight: {
         light: 300,
         normal: 400,
@@ -18,6 +27,9 @@ export default {
       colors: {
         primary: "#F96587",
         dark: "#322E2F",
+        gray: {
+          A5: "#A5A5A5",
+        },
       },
     },
   },
