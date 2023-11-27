@@ -60,7 +60,7 @@ const Signup = () => {
   }) => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${apiBaseUrl}/register`, {
+      const response = await fetch(`${apiBaseUrl}/api/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

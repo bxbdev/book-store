@@ -5,6 +5,8 @@ import toast, { Toaster } from "react-hot-toast";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import localForage from "localforage";
+import axios, { AxiosError } from "axios";
+import * as jose from "jose";
 
 // icons
 import HidePassword from "../assets/icon/hide.svg";
@@ -20,6 +22,9 @@ const UserSchema = z.object({
 
 type UserLogin = z.infer<typeof UserSchema>;
 const apiBaseUrl = import.meta.env.VITE_API_URL;
+interface ErrorResponse {
+  message: string;
+}
 
 const Login = () => {
   const navigate = useNavigate();
@@ -43,37 +48,56 @@ const Login = () => {
   const onLogin: SubmitHandler<UserLogin> = async ({ username, password }) => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${apiBaseUrl}/login`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
+      const response = await axios.post(`${apiBaseUrl}/api/login`, {
+        username,
+        password,
       });
 
       if (response.status === 401 || response.status === 404) {
-        const result = await response.text();
-        return toast.error(result);
+        const result = await response.data;
+        return toast.error(result.message);
       }
 
       if (response.status === 200) {
-        const result = await response.json();
+        const result = await response.data;
         toast.success(result.message);
         localForage.setItem("token", result.token);
+
+        const decodedToken = jose.decodeJwt(result.token);
+        const userId = decodedToken.userId;
+        localForage.setItem("userId", userId);
         navigate("/home");
         // AuthProvider的狀態需要更新
         login();
+      } else {
+        toast.error(response.data.message || "Login failed");
       }
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const axiosError = error as AxiosError;
+        const errorData = error.response.data as ErrorResponse;
+        if (axiosError.response) {
+          if (
+            axiosError.response.status === 401 ||
+            axiosError.response.status === 404
+          ) {
+            toast.error(errorData.message || "Invalid credentials");
+          } else {
+            toast.error("Something went wrong");
+          }
+        } else {
+          // 处理无响应的情况
+          toast.error("No response from server");
+        }
+      } else {
+        // 非 Axios 错误
+        toast.error("An unexpected error occurred");
+      }
+    } finally {
+      setIsLoading(false);
       // 清空表單和預設隱藏密碼
       reset();
       setShowPassword(false);
-    } catch (error) {
-      toast.error("Something went wrong");
-    } finally {
-      setIsLoading(false);
     }
   };
 

@@ -14,6 +14,7 @@ import Categories from "./pages/Categories";
 import Collections from "./pages/Collections";
 import Notifications from "./pages/Notifications";
 import Settings from "./pages/Settings";
+import UserProfile from "./pages/UserProfile";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -29,6 +30,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/collections" element={<Collections />}></Route>
             <Route path="/notifications" element={<Notifications />}></Route>
             <Route path="/settings" element={<Settings />}></Route>
+            <Route path="/profile" element={<UserProfile />}></Route>
           </Route>
 
           <Route path="*" element={<ErrorPage />}></Route>

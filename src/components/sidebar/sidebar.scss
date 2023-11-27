@@ -25,4 +25,7 @@
   img {
     @apply w-full h-full object-cover;
   }
+  &.active {
+    @apply border-2 border-primary;
+  }
 }

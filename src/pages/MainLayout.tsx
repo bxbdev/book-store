@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Layout from "./Layout";
 import { useAuth } from "../contexts/AuthContext";

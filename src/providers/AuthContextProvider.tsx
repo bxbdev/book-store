@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (res !== token) setToken(res as string);
 
       try {
-        const response = await fetch(`${apiBaseUrl}/verifyToken`, {
+        const response = await fetch(`${apiBaseUrl}/api/verifyToken`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${res}`,
