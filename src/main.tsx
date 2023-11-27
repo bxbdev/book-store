@@ -22,54 +22,15 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route path="/" element={<App />}></Route>
           <Route path="/register" element={<Signup />}></Route>
-          <Route
-            path="/home"
-            element={
-              <MainLayout>
-                <Home />
-              </MainLayout>
-            }
-          ></Route>
-          <Route
-            path="/create-book"
-            element={
-              <MainLayout>
-                <CreateBook />
-              </MainLayout>
-            }
-          ></Route>
-          <Route
-            path="/categories"
-            element={
-              <MainLayout>
-                <Categories />
-              </MainLayout>
-            }
-          ></Route>
-          <Route
-            path="/collections"
-            element={
-              <MainLayout>
-                <Collections />
-              </MainLayout>
-            }
-          ></Route>
-          <Route
-            path="/notifications"
-            element={
-              <MainLayout>
-                <Notifications />
-              </MainLayout>
-            }
-          ></Route>
-          <Route
-            path="/settings"
-            element={
-              <MainLayout>
-                <Settings />
-              </MainLayout>
-            }
-          ></Route>
+          <Route element={<MainLayout />}>
+            <Route path="/home" element={<Home />}></Route>
+            <Route path="/create-book" element={<CreateBook />}></Route>
+            <Route path="/categories" element={<Categories />}></Route>
+            <Route path="/collections" element={<Collections />}></Route>
+            <Route path="/notifications" element={<Notifications />}></Route>
+            <Route path="/settings" element={<Settings />}></Route>
+          </Route>
+
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>
       </AuthProvider>

@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Layout from "./Layout";
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
-const MainLayout = ({ children }: { children: React.ReactNode }) => {
+const MainLayout = () => {
   const { isAuth } = useAuth();
   const navigator = useNavigate();
 
@@ -16,7 +16,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     return (
       <Layout className="page">
         <Sidebar />
-        {children}
+        <Outlet />
       </Layout>
     );
   }
