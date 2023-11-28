@@ -1,5 +1,5 @@
 .sidebar {
-  @apply basis-[83px] bg-dark pt-30 pb-5 flex flex-col justify-between;
+  @apply basis-[83px] bg-dark pt-7.5 pb-5 flex flex-col justify-between;
 }
 
 .logo {
@@ -21,7 +21,7 @@
   }
 }
 .avatar {
-  @apply w-30 h-30 overflow-hidden rounded-full mt-3;
+  @apply w-7.5 h-7.5 overflow-hidden rounded-full mt-3;
   img {
     @apply w-full h-full object-cover;
   }

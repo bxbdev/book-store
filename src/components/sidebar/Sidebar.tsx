@@ -58,7 +58,7 @@ const Sidebar = () => {
           <Signout />
         </button>
         <NavLink
-          to="/profile"
+          to="/my-profile"
           className={({ isActive }) => (isActive ? "avatar active" : "avatar")}
         >
           <img

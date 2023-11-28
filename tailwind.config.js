@@ -7,13 +7,19 @@ export default {
         source: "var(--source)",
       },
       padding: {
-        30: "30px",
+        7.5: "30px",
+        15: "60px",
+        37.5: "150px",
       },
       width: {
-        30: "30px",
+        7.5: "30px",
+        15: "60px",
+        37.5: "150px",
       },
       height: {
-        30: "30px",
+        7.5: "30px",
+        15: "60px",
+        37.5: "150px",
       },
       fontWeight: {
         light: 300,

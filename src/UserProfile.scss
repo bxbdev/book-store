@@ -1,0 +1,45 @@
+.user-profile {
+  @apply justify-center items-center;
+
+  .form {
+    @apply w-full md:w-[50vw];
+  }
+
+  .title {
+    @apply text-white;
+  }
+}
+
+.upload-avatar {
+  @apply relative flex-grow-0 flex-shrink-0 h-37.5 w-37.5;
+
+  .remove-photo {
+    @apply absolute -right-0 bottom-0 z-20 bg-white;
+    svg path {
+      @apply fill-black;
+    }
+  }
+}
+
+.preview {
+  @apply absolute left-0 top-0 z-10 flex flex-col w-full h-full overflow-hidden rounded-full cursor-pointer;
+  img {
+    @apply object-cover w-full h-full;
+  }
+}
+
+.upload-avatar-input {
+  @apply flex w-full h-full opacity-0 absolute top-0 left-0 z-10 cursor-pointer;
+}
+
+.upload-avatar-input-container {
+  @apply flex flex-col w-full h-full bg-gray-200 rounded-full  cursor-pointer;
+
+  .add-photo {
+    @apply absolute left-1/2 top-1/2 w-12 h-12 -translate-x-1/2 -translate-y-1/2;
+  }
+}
+
+.user-info {
+  @apply flex-row justify-center items-center;
+}

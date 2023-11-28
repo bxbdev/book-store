@@ -30,7 +30,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/collections" element={<Collections />}></Route>
             <Route path="/notifications" element={<Notifications />}></Route>
             <Route path="/settings" element={<Settings />}></Route>
-            <Route path="/profile" element={<UserProfile />}></Route>
+            <Route path="/my-profile" element={<UserProfile />}></Route>
           </Route>
 
           <Route path="*" element={<ErrorPage />}></Route>
