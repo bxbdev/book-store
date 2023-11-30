@@ -4,11 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import Layout from "./Layout";
+import axios, { AxiosError } from "axios";
 
 // icons
 import HidePassword from "../assets/icon/hide.svg?react";
 import ShowPassowrd from "../assets/icon/show.svg?react";
 import Spinner from "../assets/icon/infinite-spinner.svg";
+import { useNavigate } from "react-router-dom";
 
 const UserSchema = z
   .object({
@@ -50,6 +52,7 @@ const Signup = () => {
     resolver: zodResolver(UserSchema),
   });
 
+  const navigate = useNavigate();
   const [showPassword, setShowPassowrd] = useState(false);
   const [showRepeatPassword, setShowRepeatPassowrd] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -60,29 +63,19 @@ const Signup = () => {
   }) => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${apiBaseUrl}/api/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
+      const response = await axios.post(`${apiBaseUrl}/api/register`, {
+        username,
+        password,
       });
 
-      const result = await response.text();
+      const result = response.data;
 
       if (response.status === 200) {
-        toast.success(result);
-      }
+        toast.success(result.message + " Will direct to login page.");
 
-      if (response.status === 400) {
-        toast.error(result);
-      }
-
-      if (response.status === 500) {
-        toast.error(result);
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       }
 
       // clear inputs
@@ -91,7 +84,9 @@ const Signup = () => {
       setShowPassowrd(false);
       setShowRepeatPassowrd(false);
     } catch (error) {
-      console.error("Error: ", error);
+      if (error instanceof AxiosError) {
+        toast.error(error.response?.data.message);
+      }
     } finally {
       setIsLoading(false);
     }

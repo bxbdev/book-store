@@ -53,13 +53,9 @@ const Login = () => {
         password,
       });
 
-      if (response.status === 401 || response.status === 404) {
-        const result = await response.data;
-        return toast.error(result.message);
-      }
+      const result = response.data;
 
       if (response.status === 200) {
-        const result = await response.data;
         toast.success(result.message);
         localForage.setItem("token", result.token);
 
