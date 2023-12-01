@@ -1,5 +1,5 @@
-import { useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import axios, { AxiosError } from "axios";
 import localForage from "localforage";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,7 +13,7 @@ import AddPhoto from "../assets/icon/photo.svg?react";
 import Spinner from "../assets/icon/infinite-spinner.svg";
 
 const UserProfileSchema = z.object({
-  avatar: z.string().optional(),
+  avatar_url: z.string().optional(),
   nickname: z.string().min(1, { message: "Name is required" }),
   email: z
     .string()
@@ -38,17 +38,78 @@ const UserProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<UserProfile>({
+    defaultValues: {
+      nickname: "",
+      email: "",
+      bio: "",
+      website: "",
+      facebook: "",
+      instagram: "",
+      x: "",
+      threads: "",
+      linkedin: "",
+      language: "",
+    },
     resolver: zodResolver(UserProfileSchema),
   });
 
   localForage.getItem("userId").then((id) => {
     setUserId(id as string);
   });
+
+  useEffect(() => {
+    if (userId) {
+      getUserProfile(userId);
+    }
+  }, [userId]);
+
+  useEffect(() => {
+    console.log(userProfile);
+    if (!userProfile) return;
+
+    if (userProfile.avatar_url) {
+      setAvatarUrl(userProfile.avatar_url);
+    }
+
+    reset({
+      nickname: userProfile.nickname,
+      email: userProfile.email,
+      bio: userProfile.bio || "",
+      website: userProfile.website || "",
+      facebook: userProfile.facebook || "",
+      instagram: userProfile.instagram || "",
+      x: userProfile.x || "",
+      threads: userProfile.threads || "",
+      linkedin: userProfile.linkedin || "",
+      language: userProfile.language || "",
+    });
+  }, [userProfile]);
+
+  const getUserProfile = async (userId: string) => {
+    try {
+      const response = await axios.get(`${apiBaseUrl}/api/user-profile`, {
+        params: {
+          userId,
+        },
+      });
+
+      if (response.status === 200) {
+        return setUserProfile(response.data.userProfile);
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.error(error.response?.data.message);
+      }
+    }
+  };
 
   const onUpdateUserProfile: SubmitHandler<UserProfile> = async (data) => {
     console.log("submit");
@@ -109,6 +170,7 @@ const UserProfile = () => {
     };
     reader.readAsDataURL(file);
   };
+
   return (
     <div className="page-contaienr user-profile">
       <form className="form" onSubmit={handleSubmit(onUpdateUserProfile)}>
@@ -126,7 +188,7 @@ const UserProfile = () => {
 
             {avatarUrl && (
               <div className="preview">
-                <img src={`${avatarUrl}`} alt="Avatar preview" />
+                <img src={`${apiBaseUrl}${avatarUrl}`} alt="Avatar preview" />
               </div>
             )}
             <div className="upload-avatar-input-container">
