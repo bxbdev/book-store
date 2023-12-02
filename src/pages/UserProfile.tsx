@@ -5,6 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import toast, { Toaster } from "react-hot-toast";
+import imageCompression, { Options } from "browser-image-compression";
 import "../UserProfile.scss";
 
 // icons
@@ -112,9 +113,6 @@ const UserProfile = () => {
   };
 
   const onUpdateUserProfile: SubmitHandler<UserProfile> = async (data) => {
-    console.log("submit");
-    console.log(data);
-    console.log(errors);
     try {
       setIsLoading(true);
       const formData = new FormData();
@@ -161,14 +159,22 @@ const UserProfile = () => {
       console.error("No file selected");
       return;
     }
-    setFile(file);
+    const options: Options = {
+      maxSizeMB: 0.1,
+      maxWidthOrHeight: 640,
+      initialQuality: 1,
+      useWebWorker: true,
+    };
+
+    const compressedFile = await imageCompression(file, options);
+    setFile(compressedFile);
 
     const reader = new FileReader();
 
     reader.onload = (e: ProgressEvent<FileReader>) => {
       setAvatarUrl(e.target?.result as string);
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(compressedFile);
   };
 
   return (
@@ -188,7 +194,11 @@ const UserProfile = () => {
 
             {avatarUrl && (
               <div className="preview">
-                <img src={`${apiBaseUrl}${avatarUrl}`} alt="Avatar preview" />
+                {avatarUrl.startsWith("/uploads") ? (
+                  <img src={`${apiBaseUrl}${avatarUrl}`} alt="Avatar preview" />
+                ) : (
+                  <img src={avatarUrl} alt="Avatar preview" />
+                )}
               </div>
             )}
             <div className="upload-avatar-input-container">
@@ -198,7 +208,7 @@ const UserProfile = () => {
               <input
                 className="upload-avatar-input"
                 type="file"
-                accept="image/jpg"
+                accept="image/jpeg, image/png, image/jpg"
                 onChange={(e) => handleAvatarUpload(e)}
               />
             </div>
@@ -214,6 +224,9 @@ const UserProfile = () => {
                   type="text"
                 />
               </div>
+              {errors.nickname && (
+                <p className="error-message">Nickname is required</p>
+              )}
             </div>
 
             <div className="form-control">
@@ -221,6 +234,9 @@ const UserProfile = () => {
               <div className="form-input">
                 <input {...register("email", { required: true })} type="text" />
               </div>
+              {errors.nickname && (
+                <p className="error-message">{errors.nickname.message}</p>
+              )}
             </div>
           </div>
         </div>
@@ -240,6 +256,9 @@ const UserProfile = () => {
             <div className="form-input">
               <input {...register("website")} type="text" />
             </div>
+            {errors.website && (
+              <p className="error-message">{errors.website.message}</p>
+            )}
           </div>
 
           {/* Facebook start */}
@@ -248,6 +267,9 @@ const UserProfile = () => {
             <div className="form-input">
               <input {...register("facebook")} type="text" />
             </div>
+            {errors.facebook && (
+              <p className="error-message">{errors.facebook.message}</p>
+            )}
           </div>
 
           {/* Instagram start */}
@@ -256,6 +278,9 @@ const UserProfile = () => {
             <div className="form-input">
               <input {...register("instagram")} type="text" />
             </div>
+            {errors.instagram && (
+              <p className="error-message">{errors.instagram.message}</p>
+            )}
           </div>
 
           {/* X start */}
@@ -264,6 +289,7 @@ const UserProfile = () => {
             <div className="form-input">
               <input {...register("x")} type="text" />
             </div>
+            {errors.x && <p className="error-message">{errors.x.message}</p>}
           </div>
 
           {/* Threads start */}
@@ -272,14 +298,9 @@ const UserProfile = () => {
             <div className="form-input">
               <input {...register("threads")} type="text" />
             </div>
-          </div>
-
-          {/* Linkedin start */}
-          <div className="form-control">
-            <label>Linkedin</label>
-            <div className="form-input">
-              <input {...register("linkedin")} type="text" />
-            </div>
+            {errors.threads && (
+              <p className="error-message">{errors.threads.message}</p>
+            )}
           </div>
 
           {/* Language start */}
